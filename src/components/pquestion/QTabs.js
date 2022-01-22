@@ -110,7 +110,7 @@ function QTabs({
           onChange={(evn) => setCode(evn.target.value)}
           padding={15}
           style={{
-            fontSize: 12,
+            fontSize: 15,
             backgroundColor: "#f5f5f5",
             fontFamily:
               "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
