@@ -12,7 +12,7 @@ import tw from "twin.macro";
 import { styled } from "@mui/material/styles";
 import { PropTypes } from "@mui/material";
 import { connect, useDispatch } from "react-redux";
-import { registerUser } from "../../actions/authActions";
+import { registerUser } from "../../Redux/actions/authActions";
 
 const Form = tw.form`flex flex-col w-4/12`;
 const FormControlBox = styled(FormControl)({

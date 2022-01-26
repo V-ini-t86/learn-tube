@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import tw from "twin.macro";
 import { styled } from "@mui/material/styles";
-import { loginUser } from "../../actions/authActions";
+import { loginUser } from "../../Redux/actions/authActions";
 import { connect, useDispatch } from "react-redux";
 
 const Form = tw.form`flex flex-col w-4/12`;
