@@ -6053,6 +6053,11 @@ is-docker@^2.0.0, is-docker@^2.1.1:
   resolved "https://registry.nlark.com/is-docker/download/is-docker-2.2.1.tgz?cache=0&sync_timestamp=1630451057403&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fis-docker%2Fdownload%2Fis-docker-2.2.1.tgz#33eeabe23cfe86f14bde4408a02c0cfb853acdaa"
   integrity sha1-M+6r4jz+hvFL3kQIoCwM+4U6zao=
 
+is-empty@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.npm.taobao.org/is-empty/download/is-empty-1.2.0.tgz#de9bb5b278738a05a0b09a57e1fb4d4a341a9f6b"
+  integrity sha1-3pu1snhzigWgsJpX4ftNSjQan2s=
+
 is-extendable@^0.1.0:
   version "0.1.1"
   resolved "https://registry.npm.taobao.org/is-extendable/download/is-extendable-0.1.1.tgz#62b110e289a471418e3ec36a617d472e301dfc89"

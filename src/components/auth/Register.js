@@ -7,9 +7,12 @@ import {
   OutlinedInput,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate, useParams, Link } from "react-router-dom";
 import tw from "twin.macro";
 import { styled } from "@mui/material/styles";
+import { PropTypes } from "@mui/material";
+import { connect, useDispatch } from "react-redux";
+import { registerUser } from "../../actions/authActions";
 
 const Form = tw.form`flex flex-col w-4/12`;
 const FormControlBox = styled(FormControl)({
@@ -24,7 +27,10 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState("");
+  const [errors, setErrors] = useState({});
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   function submitHandler(e) {
     e.preventDefault();
@@ -32,8 +38,9 @@ function Register() {
       name,
       email,
       password,
-      password2: confirmPassword,
+      confirmPassword,
     };
+    registerUser(newUser, navigate, dispatch);
     console.log(newUser);
   }
 
@@ -103,4 +110,24 @@ function Register() {
   );
 }
 
-export default Register;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+function withRouter(Component) {
+  function ComponentWithRouterProp(props) {
+    let location = useLocation();
+    let navigate = useNavigate();
+    let params = useParams();
+    return <Component {...props} router={{ location, navigate, params }} />;
+  }
+
+  return ComponentWithRouterProp;
+}
+export { withRouter };
+
+export default connect(
+  mapStateToProps,
+  { registerUser },
+  withRouter(Register)
+)(Register);

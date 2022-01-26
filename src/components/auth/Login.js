@@ -10,6 +10,8 @@ import {
 import { Link } from "react-router-dom";
 import tw from "twin.macro";
 import { styled } from "@mui/material/styles";
+import { loginUser } from "../../actions/authActions";
+import { connect, useDispatch } from "react-redux";
 
 const Form = tw.form`flex flex-col w-4/12`;
 const FormControlBox = styled(FormControl)({
@@ -19,9 +21,10 @@ const SubmitButton = styled(Button)({
   marginTop: "20px",
 });
 
-export default function Login() {
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
   function submitHandler(e) {
     e.preventDefault();
@@ -29,6 +32,7 @@ export default function Login() {
       email,
       password,
     };
+    loginUser(existingUser, dispatch);
     console.log(existingUser);
   }
   return (
@@ -77,3 +81,9 @@ export default function Login() {
     </Box>
   );
 }
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, { loginUser })(Login);
