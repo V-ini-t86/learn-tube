@@ -7,11 +7,12 @@ import {
   OutlinedInput,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import tw from "twin.macro";
 import { styled } from "@mui/material/styles";
 import { loginUser } from "../../Redux/actions/authActions";
 import { connect, useDispatch } from "react-redux";
+import { useAuthStateValue } from "../../context/AuthProvider";
 
 const Form = tw.form`flex flex-col w-4/12`;
 const FormControlBox = styled(FormControl)({
@@ -22,9 +23,11 @@ const SubmitButton = styled(Button)({
 });
 
 function Login() {
+  const { setAuth } = useAuthStateValue();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function submitHandler(e) {
     e.preventDefault();
@@ -32,8 +35,9 @@ function Login() {
       email,
       password,
     };
-    loginUser(existingUser, dispatch);
-    console.log(existingUser);
+    loginUser(existingUser, dispatch, setAuth);
+    // console.log(existingUser);
+    navigate("/");
   }
   return (
     <Box
@@ -59,10 +63,11 @@ function Login() {
           <InputLabel htmlFor="email">Email</InputLabel>
           <OutlinedInput
             label="Email"
-            type="text"
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             autoComplete="off"
+            required
           />
         </FormControlBox>
         <FormControlBox>
@@ -72,6 +77,7 @@ function Login() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </FormControlBox>
         <SubmitButton type="submit" variant="contained" color="info">

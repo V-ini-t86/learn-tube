@@ -14,6 +14,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../../Redux/actions/authActions";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -60,7 +63,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const login = false;
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -90,9 +95,11 @@ const Navbar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            <IconButton>
-              <img className="logo" src={Logo} alt="logo" />
-            </IconButton>
+            <Link to="/">
+              <IconButton>
+                <img className="logo" src={Logo} alt="logo" />
+              </IconButton>
+            </Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -164,15 +171,14 @@ const Navbar = () => {
             </Search>
           </Box>
 
+          <Link to="/dsa">DSA</Link>
+
           <Box sx={{ flexGrow: 0 }}>
-            {login === true ? (
+            {isAuthenticated === true ? (
               <>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/2.jpg"
-                    />
+                    <Avatar alt={user.name} src="/static/images/avatar/2.jpg" />
                   </IconButton>
                 </Tooltip>
                 <Menu
@@ -191,17 +197,28 @@ const Navbar = () => {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
-                    </MenuItem>
-                  ))}
+                  {settings.map((setting) => {
+                    function handleLogout() {
+                      if (setting === "Logout") {
+                        logoutUser(dispatch);
+                      }
+                      handleCloseNavMenu();
+                    }
+
+                    return (
+                      <MenuItem key={setting} onClick={handleLogout}>
+                        <Typography textAlign="center">{setting}</Typography>
+                      </MenuItem>
+                    );
+                  })}
                 </Menu>
               </>
             ) : (
-              <Button variant="outlined" color="info">
-                Login
-              </Button>
+              <Link to="/login">
+                <Button variant="outlined" color="info">
+                  Login
+                </Button>
+              </Link>
             )}
           </Box>
         </Toolbar>
