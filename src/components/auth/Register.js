@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Box,
   Button,
@@ -22,12 +22,60 @@ const SubmitButton = styled(Button)({
   marginTop: "20px",
 });
 
+const PWD_RGX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+const EMAIL_RGX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
 function Register() {
+  const userRef = useRef();
+  const errorRef = useRef();
+
   const [name, setName] = useState("");
+  const [validName, setValidName] = useState(false);
+  const [nameFocus, setNameFocus] = useState(false);
+
   const [email, setEmail] = useState("");
+  const [validEmail, setValidEmail] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
+
   const [password, setPassword] = useState("");
+  const [validPwd, setValidPwd] = useState(false);
+  const [pwdFocus, setPwdFocus] = useState(false);
+
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [validConfirmPwd, setValidConfirmPwd] = useState(false);
+  const [confirmPwdFocus, setConfirmPwdFocus] = useState(false);
+
+  const [success, setSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("hello");
+
+  useEffect(() => {
+    userRef.current.focus();
+  }, []);
+
+  // useEffect(()=>{
+  //   const result =
+  //   setValidName(true)
+  // },[])
+  useEffect(() => {
+    const result = EMAIL_RGX.test(email);
+    console.log(result);
+    console.log(email);
+    setValidEmail(result);
+  }, [email]);
+
+  useEffect(() => {
+    const result = PWD_RGX.test(password);
+    console.log(result);
+    console.log(password);
+    setValidPwd(result);
+    const match = password === confirmPassword;
+    setValidConfirmPwd(match);
+  }, [password, confirmPassword]);
+
+  useEffect(() => {
+    setErrorMsg("");
+  }, [name, email, password, confirmPassword]);
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -62,26 +110,43 @@ function Register() {
           Already have an account? <Link to="/login">Log in</Link>
         </p>
       </div>
-
+      <p
+        ref={errorRef}
+        className={errorMsg ? "errmsg" : "offscreen"}
+        aria-live="assertive"
+      >
+        {errorMsg}
+      </p>
       <Form onSubmit={submitHandler}>
         <FormControlBox>
           <InputLabel htmlFor="name">Name</InputLabel>
           <OutlinedInput
             type="text"
             label="Name"
+            ref={userRef}
+            autoComplete="off"
+            required
+            aria-invalid={validName ? true : false}
+            aria-describedby="uidnote"
             value={name}
             onChange={(e) => setName(e.target.value)}
             autoComplete="off"
+            onFocus={() => setNameFocus(true)}
+            onBlur={() => setNameFocus(false)}
           />
         </FormControlBox>
         <FormControlBox>
           <InputLabel htmlFor="email">Email</InputLabel>
           <OutlinedInput
             label="Email"
-            type="text"
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             autoComplete="off"
+            aria-invalid={validEmail ? true : false}
+            aria-describedby="uidnote"
+            onFocus={() => setEmailFocus(true)}
+            onBlur={() => setEmailFocus(false)}
           />
         </FormControlBox>
         <FormControlBox>
@@ -91,6 +156,7 @@ function Register() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </FormControlBox>
         <FormControlBox>
@@ -100,6 +166,7 @@ function Register() {
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            required
           />
         </FormControlBox>
         <SubmitButton type="submit" variant="contained" color="info">

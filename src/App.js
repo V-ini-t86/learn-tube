@@ -8,15 +8,20 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import { Provider } from "react-redux";
 import store from "./store";
+import RequireAuth from "./components/auth/RequireAuth";
 
 function App() {
   return (
     <div className="App">
       <Provider store={store}>
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/dsa" element={<DSA />} />
-          <Route path="/login" element={<Login />} />
+
+          <Route element={<RequireAuth />}>
+            <Route path="/login" element={<Login />} />
+          </Route>
           <Route path="/register" element={<Register />} />
           <Route path="/dsa/:quename" element={<Question />} />
           <Route path="*" element={<Error />} />
