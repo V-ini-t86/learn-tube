@@ -8,12 +8,13 @@ import SolutionColumn from "../pquestion/SolutionColumn";
 
 function Question() {
   const { quename } = useParams();
+  console.log(quename);
   return (
     <>
       <Navbar />
       <Grid container spacing={3}>
         <Grid item lg={6}>
-          <QuestionColumn />
+          <QuestionColumn  />
         </Grid>
         <Grid item lg={6}>
           {/* <Divider orientation="vertical" flexItem /> */}
