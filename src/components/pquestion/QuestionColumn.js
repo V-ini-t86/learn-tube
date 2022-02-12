@@ -1,10 +1,10 @@
 import React from "react";
 import QTabs from "./QTabs";
 
-function QuestionColumn() {
+function QuestionColumn({currVid}) {
   return (
     <div>
-      <QTabs />
+      <QTabs currVid={currVid} />
     </div>
   );
 }

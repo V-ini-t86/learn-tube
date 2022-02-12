@@ -11,12 +11,12 @@ function Content({loading,error,items,fetchDsa}) {
   useEffect(()=>{
     fetchDsa();
   },[]);
-  console.log(items);
+  // console.log(items);
   if(loading === true){
     console.log("loading")
     return (<div>Loading ...</div>)
   }
-  console.log(error)
+  // console.log(error)
   if(error){
   
     return <div>{error}</div>
@@ -24,7 +24,7 @@ function Content({loading,error,items,fetchDsa}) {
   return (
     <Container>
       {items.map((val) => {
-        console.log(val.name)
+        // console.log(val.name)
         return <QCard key={val.id} que={val} />;
       })}
     </Container>
