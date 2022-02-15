@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -11,6 +11,9 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import YouTube from "react-youtube";
+import axios from "axios";
+
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -45,9 +48,18 @@ function a11yProps(index) {
   };
 }
 
-function QTabs({
-  languages = ["cpp", "java", "js", "c", "css", "go", "ruby"],
-}) {
+
+
+
+function QTabs({currVid}){
+   const languages = ["cpp", "java", "js"];
+   const opts = {
+      height: '390',
+      width: '640',
+      playerVars: {
+      autoplay: 1,
+      },
+    };
   const [value, setValue] = React.useState(0);
   const [textEditorValue, setTextEditorValue] = useState("**Hello World**");
   const [code, setCode] = useState(``);
@@ -74,10 +86,14 @@ function QTabs({
           <Tab label="Code" {...a11yProps(2)} />
         </Tabs>
       </Box>
+
+     {/* youtube video box */}
       <TabPanel value={value} index={0}>
         <h3>1. Two Sum</h3>
-        <YouTube videoId="dRUpbt8vHpo" />
+        <YouTube videoId={currVid} opts={opts}/>
       </TabPanel>
+
+
       <TabPanel value={value} index={1}>
         <MDEditor value={textEditorValue} onChange={setTextEditorValue} />
         <MDEditor.Markdown source={textEditorValue} />
