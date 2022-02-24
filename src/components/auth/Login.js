@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import tw from "twin.macro";
+import { useSelector } from "react-redux";
 import { styled } from "@mui/material/styles";
 import { loginUser } from "../../Redux/actions/authActions";
 import { connect, useDispatch } from "react-redux";
@@ -29,15 +30,18 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const auth = useSelector((state) => state.auth);
+
   function submitHandler(e) {
     e.preventDefault();
     const existingUser = {
       email,
       password,
     };
+
     loginUser(existingUser, dispatch, setAuth);
     // console.log(existingUser);
-    navigate("/");
+    auth.isAuthenticated && navigate("/");
   }
   return (
     <Box

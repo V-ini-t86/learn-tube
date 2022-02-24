@@ -2,8 +2,8 @@ import { SET_CURRENT_USER, USER_LOADING } from "../actions/types";
 import isEmpty from "is-empty";
 
 const initialState = {
-  isAuthenticated: false,
-  user: {},
+  isAuthenticated: localStorage.getItem("user") ? true : false,
+  user: localStorage.getItem("user") ? localStorage.getItem("user") : {},
   loading: false,
 };
 

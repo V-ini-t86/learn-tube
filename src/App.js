@@ -16,14 +16,15 @@ function App() {
       <Provider store={store}>
         <Routes>
           {/* Public Routes */}
+          
           <Route path="/" element={<Home />} />
           <Route path="/dsa" element={<DSA />} />
+          <Route path="/dsa/:quename" element={<Question />} />
 
           <Route element={<RequireAuth />}>
             <Route path="/login" element={<Login />} />
           </Route>
           <Route path="/register" element={<Register />} />
-          <Route path="/dsa/:quename" element={<Question />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </Provider>

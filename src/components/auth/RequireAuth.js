@@ -7,7 +7,6 @@ function RequireAuth() {
   //   const {auth} =useAuthStateValue();
   const auth = useSelector((state) => state.auth);
   const location = useLocation();
-  console.log(auth);
   return !auth.isAuthenticated ? <Outlet /> : <Navigate to="/" />;
 }
 
