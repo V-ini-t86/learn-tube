@@ -52,21 +52,13 @@ function Register() {
     userRef.current.focus();
   }, []);
 
-  // useEffect(()=>{
-  //   const result =
-  //   setValidName(true)
-  // },[])
   useEffect(() => {
     const result = EMAIL_RGX.test(email);
-    console.log(result);
-    console.log(email);
     setValidEmail(result);
   }, [email]);
 
   useEffect(() => {
     const result = PWD_RGX.test(password);
-    console.log(result);
-    console.log(password);
     setValidPwd(result);
     const match = password === confirmPassword;
     setValidConfirmPwd(match);
@@ -89,7 +81,6 @@ function Register() {
       confirmPassword,
     };
     registerUser(newUser, navigate, dispatch);
-    console.log(newUser);
   }
 
   return (

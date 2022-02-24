@@ -5,7 +5,7 @@ import jwt_decode from "jwt-decode";
 
 export const registerUser = (userData, navigate, dispatch) => {
   axios
-    .post("/api/users/register", userData)
+    .post("/api/register", userData)
     .then((res) => navigate("/login")) // redirect to login on succesfull register
     .catch((err) => {
       dispatch({
@@ -18,31 +18,35 @@ export const registerUser = (userData, navigate, dispatch) => {
 // Login - get user token
 export const loginUser = (userData, dispatch, setAuth) => {
   axios
-    .post("/api/users/login", userData)
+    .post("/api/login", userData)
     .then((res) => {
       // Save to localStorage
       // Set token to localStorage
-      const { token, user } = res.data;
-      localStorage.setItem("jwtToken", token);
+      const { accessToken, refreshToken } = res.data;
+      // localStorage.setItem("jwtToken", token);
       // Set token to Auth header
-      setAuthToken(token);
+      setAuthToken(accessToken);
       // Decode token to get user data
-      const decoded = jwt_decode(token);
+      const decoded = jwt_decode(accessToken);
       // Set current user
       console.log(decoded);
-      dispatch(setCurrentUser(user));
+      dispatch(
+        setCurrentUser({ userId: decoded.aud, accessToken, refreshToken })
+      );
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          userId: decoded.aud,
+          accessToken,
+          refreshToken,
+        })
+      );
       console.log(res.data);
-      setAuth({
-        name: user.name,
-        pwd: user.password,
-        email: user.email,
-        token,
-      });
     })
     .catch((err) => {
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data,
+        payload: err,
       });
     });
 };

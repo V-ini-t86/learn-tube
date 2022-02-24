@@ -201,6 +201,7 @@ const Navbar = () => {
                     function handleLogout() {
                       if (setting === "Logout") {
                         logoutUser(dispatch);
+                        localStorage.clear();
                       }
                       handleCloseNavMenu();
                     }
