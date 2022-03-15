@@ -43,7 +43,7 @@ function Sidebar() {
         ].map((val, index) => {
           const Icon = val.Icon;
           return (
-            <span key={index}>
+            <>
               <Divider />
               <ListItem button key={val.text}>
                 <ListItemIcon>
@@ -51,7 +51,7 @@ function Sidebar() {
                 </ListItemIcon>
                 <ListItemText primary={val.text} />
               </ListItem>
-            </span>
+            </>
           );
         })}
       </List>
