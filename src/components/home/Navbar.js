@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../Redux/actions/authActions";
 
 const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Profile", "Logout"];
 const Logo = "images/nav-icon.png";
 
 const Search = styled("div")(({ theme }) => ({

@@ -1,10 +1,14 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { connect, useSelector, useDispatch } from "react-redux";
+import { fetchAllQuestionsClickedByUser } from "../../Redux/question/questionsActions";
 import Navbar from "../home/Navbar";
 
 function Home() {
-  const state = useSelector((state) => state.auth);
-  console.log(state);
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    fetchAllQuestionsClickedByUser(dispatch, JSON.parse(auth.user).userId);
+  }, []);
   return (
     <div>
       <Navbar />
@@ -12,5 +16,15 @@ function Home() {
     </div>
   );
 }
+
+// const mapStateToProps = (state) => {
+//   return {};
+// };
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     fetchUserQuestions: (userId) =>
+//       dispatch(fetchAllQuestionsClickedByUser(), userId),
+//   };
+// };
 
 export default Home;
