@@ -23,7 +23,7 @@ function QCard({ que }) {
   );
 
   return (
-    <Box width="auto" onClick={() => navigate(`/dsa/${_.kebabCase(que.name)}`)}>
+    <Box width="auto" onClick={() => navigate(`/dsa/${_.kebabCase(que.id)}`)}>
       <Card
         sx={{
           display: "flex",
