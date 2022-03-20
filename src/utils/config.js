@@ -8,7 +8,10 @@ export const getHeaders = () => {
   return {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Accept",
+    "Access-Control-Allow-Headers": "*",
+    "Access-Control-Allow-Methods": "*",
     authorization: "Bearer " + token,
   };
 };
+
+export const backendServerURL = process.env.REACT_APP_BACKEND_SERVER || "";

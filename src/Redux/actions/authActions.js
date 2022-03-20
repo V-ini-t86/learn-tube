@@ -2,10 +2,11 @@ import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 import jwt_decode from "jwt-decode";
+import { backendServerURL } from "../../utils/config";
 
 export const registerUser = (userData, navigate, dispatch) => {
   axios
-    .post("/api/register", userData)
+    .post(`${backendServerURL}/api/register`, userData)
     .then((res) => navigate("/login")) // redirect to login on succesfull register
     .catch((err) => {
       dispatch({
@@ -18,7 +19,7 @@ export const registerUser = (userData, navigate, dispatch) => {
 // Login - get user token
 export const loginUser = (userData, dispatch, setAuth) => {
   axios
-    .post("/api/login", userData)
+    .post(`${backendServerURL}/api/login`, userData)
     .then((res) => {
       // Save to localStorage
       // Set token to localStorage
@@ -29,7 +30,6 @@ export const loginUser = (userData, dispatch, setAuth) => {
       // Decode token to get user data
       const decoded = jwt_decode(accessToken);
       // Set current user
-      console.log(decoded);
       dispatch(
         setCurrentUser({ userId: decoded.aud, accessToken, refreshToken })
       );
@@ -41,7 +41,6 @@ export const loginUser = (userData, dispatch, setAuth) => {
           refreshToken,
         })
       );
-      console.log(res.data);
     })
     .catch((err) => {
       dispatch({

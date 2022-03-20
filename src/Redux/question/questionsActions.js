@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getHeaders } from "../../utils/config";
+import { getHeaders, backendServerURL } from "../../utils/config";
 import { GET_ALL_QUESTIONS_CLICKED_By_USER } from "./questionTypes";
 
 // this function (fetchDsa) need not be pure
@@ -9,11 +9,10 @@ export const fetchDsa = () => {
     // here dispatch is recieved by default
     dispatch(fetchQuestionsBegin());
     axios
-      .get("/dsa")
+      .get(`${backendServerURL}/dsa`)
       .then((response) => {
         // response.data is the users
         const users = response.data.result;
-        // console.log(users);
         dispatch(fetchQuestionsSuccess(users));
       })
       .catch((error) => {
@@ -28,9 +27,12 @@ export const fetchAllQuestionsClickedByUser = async (dispatch, user) => {
     if (!user) {
       throw new Error("");
     }
-    const { data } = await axios.get(`/api/question/user/${user.userId}`, {
-      headers: getHeaders(),
-    });
+    const { data } = await axios.get(
+      `${backendServerURL}/api/question/user/${user.userId}`,
+      {
+        headers: getHeaders(),
+      }
+    );
     console.log(data);
     localStorage.setItem("user-selected-questions", JSON.stringify(data) || []);
     dispatch(fetchAllQuestions(data));

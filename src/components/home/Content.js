@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import tw from "twin.macro";
 import QCard from "../template/Card";
-// import { questions } from "../question";
 import { fetchDsa } from "../../Redux/question/questionsActions";
 import { connect } from "react-redux";
 
@@ -11,12 +10,9 @@ function Content({ loading, error, items, fetchDsa }) {
   useEffect(() => {
     fetchDsa();
   }, []);
-  // console.log(items);
   if (loading === true) {
-    console.log("loading");
     return <div>Loading ...</div>;
   }
-  // console.log(error)
   if (error) {
     return <div>{error}</div>;
   }
@@ -25,7 +21,6 @@ function Content({ loading, error, items, fetchDsa }) {
     <Container>
       {items &&
         items.map((val) => {
-          // console.log(val.name)
           return <QCard key={val.id} que={val} />;
         })}
     </Container>

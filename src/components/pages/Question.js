@@ -8,13 +8,12 @@ import QuestionColumn from "../pquestion/QuestionColumn";
 import SolutionColumn from "../pquestion/SolutionColumn";
 import Container from "@mui/material/Container";
 import { useSelector, useDispatch } from "react-redux";
-import { getHeaders, userId } from "../../utils/config.js";
+import { getHeaders, userId, backendServerURL } from "../../utils/config.js";
 import { GET_THIS_QUESTION_DATA } from "../../Redux/reducers/getQueReducer";
 import _ from "lodash";
 
 function Question() {
   const { queId } = useParams();
-  console.log(queId);
   const allQuestions = useSelector((state) => state.dsa);
   const dispatch = useDispatch();
   const givenQuestion = allQuestions?.items[queId];
@@ -48,10 +47,9 @@ function Question() {
 
   useEffect(() => {
     const questionCreate = async () => {
-      console.log(userId, getHeaders());
       try {
         const { data } = await axios.post(
-          `/api/question/${givenQuestion?.id}`,
+          `${backendServerURL}/api/question/${givenQuestion?.id}`,
           {
             userId: userId,
             questionId: givenQuestion?.id,
