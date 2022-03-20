@@ -23,10 +23,11 @@ function Content({ loading, error, items, fetchDsa }) {
 
   return (
     <Container>
-      {items.map((val) => {
-        // console.log(val.name)
-        return <QCard key={val.id} que={val} />;
-      })}
+      {items &&
+        items.map((val) => {
+          // console.log(val.name)
+          return <QCard key={val.id} que={val} />;
+        })}
     </Container>
   );
 }
