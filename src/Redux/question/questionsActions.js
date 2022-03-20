@@ -28,11 +28,11 @@ export const fetchAllQuestionsClickedByUser = async (dispatch, user) => {
     if (!user) {
       throw new Error("");
     }
-    const { data } = await axios.get(`/api/question/user/${user}`, {
+    const { data } = await axios.get(`/api/question/user/${user.userId}`, {
       headers: getHeaders(),
     });
     console.log(data);
-    localStorage.setItem("user-selected-questions", JSON.stringify(data));
+    localStorage.setItem("user-selected-questions", JSON.stringify(data) || []);
     dispatch(fetchAllQuestions(data));
   } catch (error) {
     console.log(error.message);

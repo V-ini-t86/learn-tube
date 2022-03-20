@@ -6,8 +6,9 @@ import Navbar from "../home/Navbar";
 function Home() {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  console.log(auth);
   useEffect(() => {
-    fetchAllQuestionsClickedByUser(dispatch, JSON.parse(auth.user).userId);
+    fetchAllQuestionsClickedByUser(dispatch, auth.user);
   }, []);
   return (
     <div>
