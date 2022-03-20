@@ -40,7 +40,6 @@ function Login() {
     };
 
     loginUser(existingUser, dispatch, setAuth);
-    // console.log(existingUser);
     auth.isAuthenticated && navigate("/");
   }
   return (

@@ -8,7 +8,7 @@ function Home() {
   const dispatch = useDispatch();
   console.log(auth);
   useEffect(() => {
-    fetchAllQuestionsClickedByUser(dispatch, auth.user);
+    // fetchAllQuestionsClickedByUser(dispatch, auth.user);
   }, []);
   return (
     <div>

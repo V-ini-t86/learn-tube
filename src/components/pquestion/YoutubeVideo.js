@@ -12,7 +12,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import YouTube from "react-youtube";
 import { useParams } from "react-router-dom";
-import { getHeaders, userId } from "../../utils/config";
+import { backendServerURL, getHeaders, userId } from "../../utils/config";
 import { fetchAllQuestionsClickedByUser } from "../../Redux/question/questionsActions";
 
 function YoutubeVideo({ currVid }) {
@@ -30,10 +30,7 @@ function YoutubeVideo({ currVid }) {
   useEffect(() => {
     fetchAllQuestionsClickedByUser(dispatch, JSON.parse(auth.user).userId);
   }, []);
-  console.log({
-    id: params.queId,
-    userSelectedQuestion,
-  });
+
   const opts = {
     height: "390",
     width: "640",
@@ -51,9 +48,8 @@ function YoutubeVideo({ currVid }) {
     );
     async function getThisQuestion() {
       try {
-        console.log(thisQuestion[0]);
         const { data } = await axios.get(
-          `/api/question/${thisQuestion[0]._id}`,
+          `${backendServerURL}/api/question/${thisQuestion[0]._id}`,
           {
             headers: getHeaders(),
           }
@@ -66,19 +62,14 @@ function YoutubeVideo({ currVid }) {
       }
     }
     getThisQuestion();
-
-    // setUserSelectedQuestion({ ...thisQuestion });
-    // setIsLiked(thisQuestion.length > 0 && thisQuestion[0].liked);
-    // setIsWatchLater(thisQuestion.length > 0 && thisQuestion[0].watchLater);
   }, []);
 
   function likedHandler() {
     const updateLiked = async () => {
       try {
         const id = userSelectedQuestion._id;
-        console.log(id);
         const { data } = await axios.put(
-          `/api/question/${params.queId}`,
+          `${backendServerURL}/api/question/${params.queId}`,
           {
             id: id,
             userId: userId,
@@ -88,7 +79,6 @@ function YoutubeVideo({ currVid }) {
           },
           { headers: getHeaders() }
         );
-        console.log(data);
         setIsLiked(!isLiked);
       } catch (error) {
         console.log(error.message);
@@ -100,9 +90,8 @@ function YoutubeVideo({ currVid }) {
     const updateWatchLater = async () => {
       try {
         const id = userSelectedQuestion._id;
-        console.log(id);
         const { data } = await axios.put(
-          `/api/question/${params.queId}`,
+          `${backendServerURL}/api/question/${params.queId}`,
           {
             id: id,
             userId: userId,
@@ -112,7 +101,6 @@ function YoutubeVideo({ currVid }) {
           },
           { headers: getHeaders() }
         );
-        console.log(data);
         setIsWatchLater(!isWatchLater);
       } catch (error) {
         console.log(error.message);

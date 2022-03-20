@@ -13,3 +13,5 @@ export const getHeaders = () => {
     authorization: "Bearer " + token,
   };
 };
+
+export const backendServerURL = process.env.REACT_APP_BACKEND_SERVER || "";
