@@ -28,7 +28,8 @@ function YoutubeVideo({ currVid }) {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
-    fetchAllQuestionsClickedByUser(dispatch, JSON.parse(auth.user).userId);
+    // console.log(JSON.parse(auth.user));
+    // fetchAllQuestionsClickedByUser(dispatch, JSON.parse(auth.user) || {});
   }, []);
 
   const opts = {
@@ -40,10 +41,9 @@ function YoutubeVideo({ currVid }) {
   };
 
   useEffect(() => {
-    const userQuestions = JSON.parse(
-      localStorage.getItem("user-selected-questions")
-    );
-    const thisQuestion = userQuestions.questions.filter(
+    const userQuestions =
+      JSON.parse(localStorage.getItem("user-selected-questions")) || [];
+    const thisQuestion = userQuestions?.questions?.filter(
       (val) => val.questionId === params.queId
     );
     async function getThisQuestion() {
@@ -61,7 +61,7 @@ function YoutubeVideo({ currVid }) {
         console.log(error.message);
       }
     }
-    getThisQuestion();
+    // getThisQuestion();
   }, []);
 
   function likedHandler() {

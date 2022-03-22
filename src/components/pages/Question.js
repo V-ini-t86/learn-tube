@@ -58,7 +58,7 @@ function Question() {
             headers: getHeaders(),
           }
         );
-        // dispatch({ type: GET_THIS_QUESTION_DATA, payload: data.question });
+        dispatch({ type: GET_THIS_QUESTION_DATA, payload: data.question });
       } catch (error) {
         console.log("1");
       }

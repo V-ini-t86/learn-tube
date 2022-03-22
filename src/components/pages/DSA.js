@@ -11,7 +11,7 @@ function DSA() {
         <title>DSA | LEETCODE</title>
       </Helmet>
       <Navbar />
-      <Sidebar />
+      {/* <Sidebar /> */}
       <Content />
     </div>
   );
