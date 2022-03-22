@@ -3,8 +3,9 @@ import tw from "twin.macro";
 import QCard from "../template/Card";
 import { fetchDsa } from "../../Redux/question/questionsActions";
 import { connect } from "react-redux";
+import ButtonInteraction from "../DSA/ButtonInteraction";
 
-const Container = tw.div`ml-5 sm:ml-5 lg:ml-64 md:ml-5 grid gap-12 grid-cols-3 grid-rows-3 mx-4`;
+const Container = tw.div`mx-5`;
 
 function Content({ loading, error, items, fetchDsa }) {
   useEffect(() => {
@@ -19,10 +20,11 @@ function Content({ loading, error, items, fetchDsa }) {
 
   return (
     <Container>
-      {items &&
+      <ButtonInteraction />
+      {/* {items &&
         items.map((val) => {
           return <QCard key={val.id} que={val} />;
-        })}
+        })} */}
     </Container>
   );
 }
