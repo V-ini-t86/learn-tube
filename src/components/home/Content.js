@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { styled, theme } from "@mui/system";
 import ButtonInteraction from "../DSA/ButtonInteraction";
 import Header from "../DSA/Header";
+import Topics from "../DSA/Topics";
 
 import BackgroundImage from "../../images/bg-dsa.jpg";
 
@@ -43,15 +44,7 @@ function Content({ loading, error, items, fetchDsa }) {
         <Header />
         <ButtonInteraction />
       </Stack>
-
-      {/* <img
-        style={{
-          postition: "absolute",
-          width: `${window.screen.width}`,
-        }}
-        src={BackgroundImage}
-        alt="bg-img"
-      /> */}
+      <Topics />
       <div>
         {items &&
           items.map((val) => {
