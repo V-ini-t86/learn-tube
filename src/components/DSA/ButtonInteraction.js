@@ -26,6 +26,7 @@ const Container = styled(Box)(({ theme }) => ({
   borderRadius: "20.8523px",
   minWidth: "734px",
   minHeight: "61.86px",
+  marginBottom: "15vh",
 }));
 
 const Icon = styled("img")(({ theme }) => ({
