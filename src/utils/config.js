@@ -14,4 +14,5 @@ export const getHeaders = () => {
   };
 };
 
-export const backendServerURL = process.env.REACT_APP_BACKEND_SERVER || "";
+export const backendServerURL =
+  process.env.REACT_APP_LOCAL_SERVER || process.env.REACT_APP_BACKEND_SERVER;

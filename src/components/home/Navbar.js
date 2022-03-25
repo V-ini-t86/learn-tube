@@ -14,24 +14,45 @@ import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import Stack from "@mui/material/Stack";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../Redux/actions/authActions";
 
+import Logo from "../../images/LTlogo.svg";
+
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Logout"];
-const Logo = "images/nav-icon.png";
+const NavContainer = styled(AppBar)(({ theme }) => ({
+  backgroundColor: "#373e98",
+}));
+const LogoBtn = styled(IconButton)(({ theme }) => ({
+  backgroundColor: "white",
+  borderRadius: "1rem",
+  padding: "0px",
+  margin: "5px",
+  "&:hover": {
+    backgroundColor: "white",
+  },
+}));
+const LogoImg = styled("img")(({ theme }) => ({
+  width: 101,
+  height: 91,
+  color: "white",
+  borderRadius: "1rem",
+}));
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.grey[500], 0.15),
+  backgroundColor: "#eeeeee",
   "&:hover": {
-    backgroundColor: alpha(theme.palette.grey[500], 0.25),
+    backgroundColor: "#f5f5f5",
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
   width: "100%",
+  borderRadius: "1rem",
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(3),
     width: "auto",
@@ -52,6 +73,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    color: "black",
+    fontWeight: "700",
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
@@ -83,25 +106,39 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar color="transparent" position="static">
+    <NavContainer position="static">
       <Container maxWidth="xl">
         <Toolbar
           sx={{ display: "flex", justifyContent: "space-between" }}
           disableGutters
         >
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
-          >
-            <Link to="/">
-              <IconButton>
-                <img className="logo" src={Logo} alt="logo" />
-              </IconButton>
-            </Link>
-          </Typography>
-
+          <Stack direction="row" alignItems="center">
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+            >
+              <Link to="/">
+                <LogoBtn>
+                  <LogoImg className="logo" src={Logo} alt="logo" />
+                </LogoBtn>
+              </Link>
+            </Typography>
+            <Typography
+              variant="h4"
+              sx={{
+                fontFamily: "Roboto, sans-serif",
+                textDecoration: "underline",
+                textDecorationThickness: "1px",
+                textUnderlineOffset: "8px",
+              }}
+              component="h4"
+              fontWeight="light"
+            >
+              LEARN-TUBE
+            </Typography>
+          </Stack>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -159,21 +196,30 @@ const Navbar = () => {
               </Button>
             ))}
           </Box> */}
-          <Box sx={{ width: "70%" }}>
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
-          </Box>
 
-          <Link to="/dsa">DSA</Link>
+          {/* <Link to="/dsa">DSA</Link> */}
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            columnGap="1rem"
+            sx={{
+              textDecoration: "underline",
+              textDecorationThickness: "1px",
+              textUnderlineOffset: "8px",
+            }}
+          >
+            <Box sx={{ width: "60%" }}>
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon sx={{ color: "black" }} />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ "aria-label": "search" }}
+                />
+              </Search>
+            </Box>
             {isAuthenticated === true ? (
               <>
                 <Tooltip title="Open settings">
@@ -215,16 +261,39 @@ const Navbar = () => {
                 </Menu>
               </>
             ) : (
-              <Link to="/login">
-                <Button variant="outlined" color="info">
-                  Login
-                </Button>
-              </Link>
+              <>
+                <Link
+                  style={{
+                    fontFamily: "Roboto, sans-serif",
+                    textDecoration: "none",
+                    fontWeight: "bolder",
+                    color: "white",
+                  }}
+                  to="/login"
+                >
+                  <Typography variant="h6" component="h6" fontWeight="light">
+                    LOGIN
+                  </Typography>
+                </Link>
+                <Link
+                  style={{
+                    fontFamily: "Roboto, sans-serif",
+                    textDecoration: "none",
+                    fontWeight: "bolder",
+                    color: "white",
+                  }}
+                  to="/register"
+                >
+                  <Typography variant="h6" component="h6" fontWeight="light">
+                    REGISTER
+                  </Typography>
+                </Link>
+              </>
             )}
           </Box>
         </Toolbar>
       </Container>
-    </AppBar>
+    </NavContainer>
   );
 };
 export default Navbar;

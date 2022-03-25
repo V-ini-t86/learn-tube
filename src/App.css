@@ -11,3 +11,9 @@
 .css-1818qlc-MuiDrawer-docked .MuiDrawer-paper {
   margin-top: 73px;
 }
+
+.dsa-container {
+  background-image: url("./images/bg-dsa.jpg");
+  width: 100%;
+  height: 100%;
+}
