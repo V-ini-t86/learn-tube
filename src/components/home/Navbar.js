@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../Redux/actions/authActions";
 
 import Logo from "../../images/LTlogo.svg";
+import NavHeader from "./NavHeader";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Logout"];
@@ -112,33 +113,7 @@ const Navbar = () => {
           sx={{ display: "flex", justifyContent: "space-between" }}
           disableGutters
         >
-          <Stack direction="row" alignItems="center">
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
-            >
-              <Link to="/">
-                <LogoBtn>
-                  <LogoImg className="logo" src={Logo} alt="logo" />
-                </LogoBtn>
-              </Link>
-            </Typography>
-            <Typography
-              variant="h4"
-              sx={{
-                fontFamily: "Roboto, sans-serif",
-                textDecoration: "underline",
-                textDecorationThickness: "1px",
-                textUnderlineOffset: "8px",
-              }}
-              component="h4"
-              fontWeight="light"
-            >
-              LEARN-TUBE
-            </Typography>
-          </Stack>
+          <NavHeader />
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
