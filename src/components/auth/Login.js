@@ -17,9 +17,12 @@ import { connect, useDispatch } from "react-redux";
 import { useAuthStateValue } from "../../context/AuthProvider";
 import NavHeader from "../home/NavHeader";
 import GoogleIcon from "../../images/company/google.png";
+import LoginImage from "../../images/login-image3.png";
 import { withTheme } from "styled-components";
 
-const Form = tw.form`flex mt-9 flex-col w-7/12 gap-9`;
+const Form = tw.form`flex mt-9 flex-col w-7/12 gap-9 `;
+const TwoColumn = tw.div`grid items-center justify-items-center md:grid-cols-2 lg:grid-cols-2 gap-4`;
+const Image = tw.img`w-7/12`;
 const FormControlBox = styled(FormControl)({});
 const IconBtn = styled(IconButton)({
   background: "white",
@@ -53,13 +56,13 @@ const SubmitButton = styled(Button)({
 });
 
 const Container = styled(Box)(({ theme }) => ({
-  padding: "2rem",
+  padding: "2rem 0rem",
   background: "linear-gradient(180deg, #001435 0%, #023384 100%)",
   height: "100%",
   width: "100%",
 }));
 
-const NavContainer = tw.div`m-4 ml-20`;
+const NavContainer = tw.div`mx-6`;
 const Title = styled("h3")({
   fontFamily: "PT Sans",
   color: "white",
@@ -89,7 +92,7 @@ const LinkToAccount = styled("h5")({
 });
 
 const FormContainer = styled(Box)(({ theme }) => ({
-  padding: "2rem",
+  padding: "2rem 0.5rem 2rem 0.5rem",
   background: "#00051d",
   color: "white",
   borderRadius: "19px",
@@ -122,78 +125,80 @@ function Login() {
       <NavContainer>
         <NavHeader />
       </NavContainer>
+      <TwoColumn>
+        <Image src={LoginImage} alt="login-image" />
+        <FormContainer>
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+              <Inline>
+                <Title>Welcome to </Title>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    fontFamily: "Roboto, sans-serif",
+                    color: "white",
+                    marginLeft: "0.5rem",
+                    fontWeight: 400,
+                  }}
+                  component="h4"
+                  fontWeight="light"
+                >
+                  LEARN-TUBE
+                </Typography>
+              </Inline>
+              <Inline>
+                <SubTitle>new To Learn-Tube? </SubTitle>{" "}
+                <Link style={{ textDecoration: "none" }} to="/register">
+                  <LinkToAccount> Create an account</LinkToAccount>
+                </Link>
+              </Inline>
+            </div>
 
-      <FormContainer>
-        <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-            <Inline>
-              <Title>Welcome to </Title>
-              <Typography
-                variant="h4"
-                sx={{
-                  fontFamily: "Roboto, sans-serif",
-                  color: "white",
-                  marginLeft: "0.5rem",
-                  fontWeight: 400,
-                }}
-                component="h4"
-                fontWeight="light"
+            <Form onSubmit={submitHandler}>
+              <FormControlBox>
+                <Input
+                  label="Email"
+                  type="email"
+                  value={email}
+                  placeholder="Email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  autoComplete="off"
+                  required
+                />
+              </FormControlBox>
+              <FormControlBox>
+                <Input
+                  label="Password"
+                  type="password"
+                  value={password}
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </FormControlBox>
+              <SubmitButton type="submit" variant="contained" color="info">
+                Login
+              </SubmitButton>
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                gap="10px"
               >
-                LEARN-TUBE
-              </Typography>
-            </Inline>
-            <Inline>
-              <SubTitle>new To Learn-Tube? </SubTitle>{" "}
-              <Link style={{ textDecoration: "none" }} to="/register">
-                <LinkToAccount> Create an account</LinkToAccount>
-              </Link>
-            </Inline>
-          </div>
-
-          <Form onSubmit={submitHandler}>
-            <FormControlBox>
-              <Input
-                label="Email"
-                type="email"
-                value={email}
-                placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
-                autoComplete="off"
-                required
-              />
-            </FormControlBox>
-            <FormControlBox>
-              <Input
-                label="Password"
-                type="password"
-                value={password}
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </FormControlBox>
-            <SubmitButton type="submit" variant="contained" color="info">
-              Login
-            </SubmitButton>
-            <Box
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              gap="10px"
-            >
-              <p>or sign in with</p>
-              <IconBtn>
-                <img src={GoogleIcon} alt="google-icon" />
-              </IconBtn>
-            </Box>
-          </Form>
-        </Box>
-      </FormContainer>
+                <p>or sign in with</p>
+                <IconBtn>
+                  <img src={GoogleIcon} alt="google-icon" />
+                </IconBtn>
+              </Box>
+            </Form>
+          </Box>
+        </FormContainer>
+      </TwoColumn>
     </Container>
   );
 }
