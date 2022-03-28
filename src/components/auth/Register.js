@@ -13,14 +13,24 @@ import { styled } from "@mui/material/styles";
 import { PropTypes } from "@mui/material";
 import { connect, useDispatch } from "react-redux";
 import { registerUser } from "../../Redux/actions/authActions";
-
-const Form = tw.form`flex flex-col w-4/12`;
-const FormControlBox = styled(FormControl)({
-  marginTop: "20px",
-});
-const SubmitButton = styled(Button)({
-  marginTop: "20px",
-});
+import {
+  Form,
+  TwoColumn,
+  Image,
+  Title,
+  SubTitle,
+  FormControlBox,
+  IconBtn,
+  Input,
+  SubmitButton,
+  Container,
+  NavContainer,
+  LinkToAccount,
+  FormContainer,
+  Inline,
+} from "../template/FormComponents";
+import NavHeader from "../home/NavHeader";
+import LoginImage from "../../images/login-image3.png";
 
 const PWD_RGX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 const EMAIL_RGX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -47,10 +57,6 @@ function Register() {
 
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState("hello");
-
-  useEffect(() => {
-    userRef.current.focus();
-  }, []);
 
   useEffect(() => {
     const result = EMAIL_RGX.test(email);
@@ -84,87 +90,101 @@ function Register() {
   }
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-        <Typography component="h2" variant="h2">
-          Register
-        </Typography>
-        <p className="grey-text text-darken-1">
-          Already have an account? <Link to="/login">Log in</Link>
-        </p>
-      </div>
-      <p
-        ref={errorRef}
-        className={errorMsg ? "errmsg" : "offscreen"}
-        aria-live="assertive"
-      >
-        {errorMsg}
-      </p>
-      <Form onSubmit={submitHandler}>
-        <FormControlBox>
-          <InputLabel htmlFor="name">Name</InputLabel>
-          <OutlinedInput
-            type="text"
-            label="Name"
-            ref={userRef}
-            autoComplete="off"
-            required
-            aria-invalid={validName ? true : false}
-            aria-describedby="uidnote"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            autoComplete="off"
-            onFocus={() => setNameFocus(true)}
-            onBlur={() => setNameFocus(false)}
-          />
-        </FormControlBox>
-        <FormControlBox>
-          <InputLabel htmlFor="email">Email</InputLabel>
-          <OutlinedInput
-            label="Email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            autoComplete="off"
-            aria-invalid={validEmail ? true : false}
-            aria-describedby="uidnote"
-            onFocus={() => setEmailFocus(true)}
-            onBlur={() => setEmailFocus(false)}
-          />
-        </FormControlBox>
-        <FormControlBox>
-          <InputLabel htmlFor="password">Password</InputLabel>
-          <OutlinedInput
-            label="Password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </FormControlBox>
-        <FormControlBox>
-          <InputLabel htmlFor="confirm-password">Confirm password</InputLabel>
-          <OutlinedInput
-            label="Confirm password"
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </FormControlBox>
-        <SubmitButton type="submit" variant="contained" color="info">
-          Sign Up
-        </SubmitButton>
-      </Form>
-    </Box>
+    <Container>
+      <NavContainer>
+        <NavHeader />
+      </NavContainer>
+      <TwoColumn>
+        <Image src={LoginImage} alt="login-image" />
+        <FormContainer>
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+              <Inline>
+                <Title>Welcome to </Title>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    fontFamily: "Roboto, sans-serif",
+                    color: "white",
+                    marginLeft: "0.5rem",
+                    fontWeight: 400,
+                  }}
+                  component="h4"
+                  fontWeight="light"
+                >
+                  LEARN-TUBE
+                </Typography>
+              </Inline>
+              <Inline>
+                <SubTitle>already have an Account? </SubTitle>{" "}
+                <Link style={{ textDecoration: "none" }} to="/login">
+                  <LinkToAccount> Sign in</LinkToAccount>
+                </Link>
+              </Inline>
+            </div>
+            <p
+              ref={errorRef}
+              className={errorMsg ? "errmsg" : "offscreen"}
+              aria-live="assertive"
+            >
+              {errorMsg}
+            </p>
+            <Form onSubmit={submitHandler}>
+              <FormControlBox>
+                <Input
+                  type="text"
+                  label="Name"
+                  placeholder="Name"
+                  autoComplete="off"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </FormControlBox>
+              <FormControlBox>
+                <Input
+                  label="Email"
+                  type="text"
+                  value={email}
+                  placeholder="Email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  autoComplete="off"
+                  required
+                />
+              </FormControlBox>
+              <FormControlBox>
+                <Input
+                  label="Password"
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </FormControlBox>
+              <FormControlBox>
+                <Input
+                  label="Confirm password"
+                  type="password"
+                  placeholder="Confirm Password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+              </FormControlBox>
+              <SubmitButton type="submit" variant="contained" color="info">
+                Sign Up
+              </SubmitButton>
+            </Form>
+          </Box>
+        </FormContainer>
+      </TwoColumn>
+    </Container>
   );
 }
 
