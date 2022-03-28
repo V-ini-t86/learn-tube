@@ -11,9 +11,31 @@ import {
   Dot,
   FooterTitle,
 } from "./Components";
+import { companyIcons } from "../DSA/companies";
 
 function QCard({ que }) {
   const navigate = useNavigate();
+  const companies = que.companies.split(",");
+
+  function findIcons(title) {
+    return new Promise((res, rej) => {
+      let ci = companyIcons.filter((icon) => {
+        return icon.title === title;
+      });
+      if (ci) {
+        res(ci);
+      }
+    });
+  }
+
+  const c = companies.map((val) => {
+    let CI = findIcons(val).then((res) => res);
+    return {
+      icon: CI.icon,
+      title: CI.title,
+    };
+  });
+
   return (
     <>
       <Card>
@@ -37,7 +59,14 @@ function QCard({ que }) {
       </Card>
       <CardFooter>
         <FooterTitle>{que.pattern[0]}</FooterTitle>
-        <FooterTitle>{que.companies}</FooterTitle>
+        <FooterTitle>
+          {`${companies[0] ? companies[0] : ""}, ${
+            companies[1] ? companies[1] : ""
+          }, ${companies[2] ? companies[2] : ""}, ${
+            companies[3] ? companies[3] : ""
+          }`}
+          ...
+        </FooterTitle>
       </CardFooter>
     </>
   );

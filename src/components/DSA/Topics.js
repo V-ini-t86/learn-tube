@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography, Chip } from "@mui/material";
 import tw from "twin.macro";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 import { deepPurple } from "@mui/material/colors";
 import { styled, theme } from "@mui/system";
 import { HeadSubTitle } from "../template/Components";
+import { topic } from "./companies";
+import { backendServerURL } from "../../utils/config";
+import { fetchQuestionsSuccess } from "../../Redux/question/questionsActions";
 
 const Container = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -12,33 +17,36 @@ const Container = styled(Box)(({ theme }) => ({
 const Header = tw(HeadSubTitle)`text-black text-3xl text-center my-1`;
 
 function Topics() {
-  const topic = [
-    { id: 1, title: "Arrays" },
-    { id: 2, title: "BitManipulation" },
-    { id: 3, title: "BFS" },
-    { id: 4, title: "DFS" },
-    { id: 5, title: "UnionFind" },
-    { id: 5, title: "TopologicalSort" },
-    { id: 6, title: "Backtracking" },
-    { id: 7, title: "BinarySearch" },
-    { id: 8, title: "Heap" },
-    { id: 9, title: "BucketSort" },
-    { id: 10, title: "DynamicProgramming" },
-    { id: 11, title: "Trie" },
-    { id: 12, title: "Design" },
-    { id: 13, title: "Greedy" },
-    { id: 14, title: "Fast&SlowPointers" },
-    { id: 15, title: "Intervals" },
-    { id: 16, title: "In-placereversalofalinkedlist" },
-    { id: 17, title: "SlidingWindow" },
-    { id: 18, title: "Sorting" },
-    { id: 19, title: "TwoPointers" },
-  ];
+  const [currTopic, setCurrTopic] = useState(null);
+
+  const dispatch = useDispatch();
   const handleDelete = () => {
-    console.info("You clicked the delete icon.");
+    setCurrTopic(null);
+    const removeByTopics = async () => {
+      try {
+        const { data } = await axios.get(`${backendServerURL}/dsa`);
+        dispatch(fetchQuestionsSuccess(data.result));
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    removeByTopics();
   };
-  const handleClick = () => {
-    console.info("You clicked the Chip.");
+  const handleClick = (top) => {
+    setCurrTopic(top);
+    const filterByTopics = async () => {
+      try {
+        const { data } = await axios.get(
+          `${backendServerURL}/dsa?topic=${top}`
+        );
+        dispatch(fetchQuestionsSuccess(data.result));
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    filterByTopics();
   };
   return (
     <Container>
@@ -79,7 +87,7 @@ function Topics() {
                     size="medium"
                     color={"primary"}
                     label={val.title}
-                    onClick={handleClick}
+                    onClick={() => handleClick(val.title)}
                   />
                 );
               })}
