@@ -60,11 +60,12 @@ function QCard({ que }) {
       <CardFooter>
         <FooterTitle>{que.pattern[0]}</FooterTitle>
         <FooterTitle>
-          {que.companies}
-          {/* {c.map((val) => {
-            return <img src={val.icon} />;
-          })} */}
-          <img src={c[0].icon} />
+          {`${companies[0] ? companies[0] : ""}, ${
+            companies[1] ? companies[1] : ""
+          }, ${companies[2] ? companies[2] : ""}, ${
+            companies[3] ? companies[3] : ""
+          }`}
+          ...
         </FooterTitle>
       </CardFooter>
     </>
