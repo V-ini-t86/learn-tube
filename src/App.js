@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "./components/pages/Home";
 import DSA from "./components/pages/DSA";
 import Error from "./components/pages/Error";
@@ -17,7 +17,7 @@ function App() {
         <Routes>
           {/* Public Routes */}
 
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Navigate to="/dsa" replace />} />
           <Route path="/dsa" element={<DSA />} />
 
           <Route path="/dsa/:queId" element={<Question />} />
