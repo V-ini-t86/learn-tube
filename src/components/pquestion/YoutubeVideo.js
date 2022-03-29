@@ -14,6 +14,7 @@ import YouTube from "react-youtube";
 import { useParams } from "react-router-dom";
 import { backendServerURL, getHeaders, userId } from "../../utils/config";
 import { fetchAllQuestionsClickedByUser } from "../../Redux/question/questionsActions";
+import ErrorModal from "../DSA/ErrorModal";
 
 function YoutubeVideo({ currVid }) {
   const params = useParams();
@@ -24,6 +25,9 @@ function YoutubeVideo({ currVid }) {
   const [isWatchLater, setIsWatchLater] = useState(false);
   const [question, setQuestions] = useState(pquestion);
   const [userSelectedQuestion, setUserSelectedQuestion] = useState({});
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -81,7 +85,7 @@ function YoutubeVideo({ currVid }) {
         );
         setIsLiked(!isLiked);
       } catch (error) {
-        console.log(error.message);
+        setOpen(true);
       }
     };
     updateLiked();
@@ -103,10 +107,14 @@ function YoutubeVideo({ currVid }) {
         );
         setIsWatchLater(!isWatchLater);
       } catch (error) {
+        setOpen(true);
         console.log(error.message);
       }
     };
     updateWatchLater();
+  }
+  function playListHandler() {
+    setOpen(true);
   }
 
   return (
@@ -127,9 +135,10 @@ function YoutubeVideo({ currVid }) {
           {isWatchLater ? <WatchLater /> : <WatchLaterOutlined />}
         </IconButton>
       </Tooltip>
-      <IconButton>
+      <IconButton onClick={playListHandler}>
         <PlaylistAdd />
       </IconButton>
+      {open && <ErrorModal open={open} setOpen={setOpen} />}
     </>
   );
 }

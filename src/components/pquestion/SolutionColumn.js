@@ -1,31 +1,35 @@
 import React from "react";
 import tw from "twin.macro";
+import { Stack } from "@mui/material";
 import YouTube from "react-youtube";
 
-const List = tw.div`p-5 mx-auto shadow-lg mt-4 w-auto drop-shadow-md rounded-lg drop-shadow-xl`;
+const List = tw.div`p-5 shadow-lg mt-4 w-80 flex justify-center drop-shadow-md rounded-lg drop-shadow-xl`;
 
-function SolutionColumn({setCurrVid,videos}) {
+function SolutionColumn({ setCurrVid, videos }) {
   const listsOfSolutions = videos;
- 
- 
+
   return (
-    <div>
+    <Stack overflow="auto" height="550px">
       <h3>Solutions By Other Youtuber</h3>
       {listsOfSolutions.map((id) => {
         return (
           <List>
-           {/* <YouTube videoId={id} opts={opts}/> */}
-           <img src={`https://i.ytimg.com/vi/${id}/mqdefault.jpg`} height={180} width={300} onClick={()=>{setCurrVid(id) }} ></img>
+            <img
+              src={`https://i.ytimg.com/vi/${id}/mqdefault.jpg`}
+              height={180}
+              width={300}
+              onClick={() => {
+                setCurrVid(id);
+              }}
+            ></img>
           </List>
         );
       })}
-    </div>
+    </Stack>
   );
 }
 
 export default SolutionColumn;
-
-
 
 // [
 //   {
