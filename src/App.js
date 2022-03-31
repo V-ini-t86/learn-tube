@@ -16,12 +16,9 @@ function App() {
       <Provider store={store}>
         <Routes>
           {/* Public Routes */}
-
           <Route path="/" element={<Navigate to="/dsa" replace />} />
           <Route path="/dsa" element={<DSA />} />
-
           <Route path="/dsa/:queId" element={<Question />} />
-
           <Route element={<RequireAuth />}>
             <Route path="/login" element={<Login />} />
           </Route>

@@ -9,6 +9,7 @@ import { HeadSubTitle } from "../template/Components";
 import { topic } from "./companies";
 import { backendServerURL } from "../../utils/config";
 import { fetchQuestionsSuccess } from "../../Redux/question/questionsActions";
+import TopicChip from "./Topic";
 
 const Container = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -17,37 +18,6 @@ const Container = styled(Box)(({ theme }) => ({
 const Header = tw(HeadSubTitle)`text-black text-3xl text-center my-1`;
 
 function Topics() {
-  const [currTopic, setCurrTopic] = useState(null);
-
-  const dispatch = useDispatch();
-  const handleDelete = () => {
-    setCurrTopic(null);
-    const removeByTopics = async () => {
-      try {
-        const { data } = await axios.get(`${backendServerURL}/dsa`);
-        dispatch(fetchQuestionsSuccess(data.result));
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-
-    removeByTopics();
-  };
-  const handleClick = (top) => {
-    setCurrTopic(top);
-    const filterByTopics = async () => {
-      try {
-        const { data } = await axios.get(
-          `${backendServerURL}/dsa?topic=${top}`
-        );
-        dispatch(fetchQuestionsSuccess(data.result));
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-
-    filterByTopics();
-  };
   return (
     <Container>
       <Box
@@ -79,17 +49,7 @@ function Topics() {
           >
             {topic &&
               topic.map((val) => {
-                return (
-                  <Chip
-                    sx={{ color: "white" }}
-                    variant="outlined"
-                    key={val.id}
-                    size="medium"
-                    color={"primary"}
-                    label={val.title}
-                    onClick={() => handleClick(val.title)}
-                  />
-                );
+                return <TopicChip key={val.id} title={val.title} />;
               })}
           </div>
         </Box>
