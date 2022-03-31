@@ -4,6 +4,7 @@ import errorReducers from "./errorReducers";
 import questions from "../question/questionReducers";
 import userQuestionReducers from "./userQuestionReducers";
 import getQueReducer from "./getQueReducer";
+import filterReducer from "./filterReducers";
 
 export default combineReducers({
   auth: authReducers,
@@ -11,4 +12,5 @@ export default combineReducers({
   dsa: questions,
   userQuestions: userQuestionReducers,
   quest: getQueReducer,
+  filtQues: filterReducer,
 });

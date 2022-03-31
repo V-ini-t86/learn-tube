@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import tw from "twin.macro";
 import { Stack } from "@mui/material";
+import ReactPaginate from "react-paginate";
 import QCard from "../template/Card";
 import { fetchDsa } from "../../Redux/question/questionsActions";
 import { connect } from "react-redux";
 import { styled, theme } from "@mui/system";
 import ButtonInteraction from "../DSA/ButtonInteraction";
+
 import Header from "../DSA/Header";
 import Topics from "../DSA/Topics";
 
 import BackgroundImage from "../../images/bg-dsa.jpg";
+import PaginatedItems from "./PaginatedItems";
 
 // const Container = tw.div`mx-5`;
 const Container = styled("div")(({ theme }) => ({
@@ -45,12 +48,13 @@ function Content({ loading, error, items, fetchDsa }) {
         <ButtonInteraction />
       </Stack>
       <Topics />
-      <div>
+      <PaginatedItems itemsPerPage={15} questions={items} />
+      {/* <div>
         {items &&
           items.map((val) => {
             return <QCard key={val.id} que={val} />;
           })}
-      </div>
+      </div> */}
     </Container>
   );
 }
