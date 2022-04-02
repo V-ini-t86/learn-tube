@@ -184,7 +184,7 @@ const Navbar = () => {
               textUnderlineOffset: "8px",
             }}
           >
-            <Box sx={{ width: "60%" }}>
+            {/* <Box sx={{ width: "60%" }}>
               <Search>
                 <SearchIconWrapper>
                   <SearchIcon sx={{ color: "black" }} />
@@ -194,7 +194,7 @@ const Navbar = () => {
                   inputProps={{ "aria-label": "search" }}
                 />
               </Search>
-            </Box>
+            </Box> */}
             {isAuthenticated === true ? (
               <>
                 <Tooltip title="Open settings">

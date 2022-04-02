@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import tw from "twin.macro";
-import { Stack } from "@mui/material";
+import { Stack, Box } from "@mui/material";
 import ReactPaginate from "react-paginate";
 import QCard from "../template/Card";
 import { fetchDsa } from "../../Redux/question/questionsActions";
 import { connect } from "react-redux";
 import { styled, theme } from "@mui/system";
+import { Spinner } from "react-spinner-animated";
 import ButtonInteraction from "../DSA/ButtonInteraction";
 
 import Header from "../DSA/Header";
@@ -13,12 +14,10 @@ import Topics from "../DSA/Topics";
 
 import BackgroundImage from "../../images/bg-dsa.jpg";
 import PaginatedItems from "./PaginatedItems";
+import Loader from "./Loader";
 
 // const Container = tw.div`mx-5`;
 const Container = styled("div")(({ theme }) => ({
-  // background: `url(${BackgroundImage})`,
-  // backgroundSize: "contain, cover",
-  // backgroundRepeat: "no-repeat",
   background: `#373e98`,
   padding: "20vh 10vh",
 }));
@@ -34,20 +33,22 @@ function Content({ loading, error, items, fetchDsa }) {
   useEffect(() => {
     fetchDsa();
   }, []);
+
   if (loading === true) {
-    return <div>Loading ...</div>;
+    return <Loader />;
   }
+
   if (error) {
     return <div>{error}</div>;
   }
 
   return (
     <Container>
-      <Stack alignItems="center" gap="15vh">
+      <Stack alignItems="center" gap="5vh">
         <Header />
-        <ButtonInteraction />
+        {/* <ButtonInteraction /> */}
+        <Topics />
       </Stack>
-      <Topics />
       <PaginatedItems itemsPerPage={15} questions={items} />
       {/* <div>
         {items &&

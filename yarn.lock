@@ -9322,6 +9322,11 @@ react-side-effect@^2.1.0:
   resolved "https://registry.npmjs.org/react-side-effect/-/react-side-effect-2.1.1.tgz"
   integrity sha512-2FoTQzRNTncBVtnzxFOk2mCpcfxQpenBMbk5kSVBg5UcPqV9fRbgY2zhb7GTWWOlpFmAxhClBDlIq8Rsubz1yQ==
 
+react-spinner-animated@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.npmmirror.com/react-spinner-animated/-/react-spinner-animated-3.1.1.tgz#2e8a589afe3c0bef95980ca00dd346d02d58bdd8"
+  integrity sha512-bv4YRVAKjAMahHmeQfLp9qD+Y4v/ZkV9L/kYzVeAOSvvjjVknqdTn9iNT0CBqsW4AU3oFZ/xTle/5C8qzOvvsg==
+
 react-transition-group@^4.4.2:
   version "4.4.2"
   resolved "https://registry.npmjs.org/react-transition-group/-/react-transition-group-4.4.2.tgz"

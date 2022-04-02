@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import ReactPaginate from "react-paginate";
+import { useSelector } from "react-redux";
 import Items from "./Items";
 
 const MyPaginate = styled(ReactPaginate)({
@@ -48,21 +49,23 @@ const MyPaginate = styled(ReactPaginate)({
 function PaginatedItems({ questions, itemsPerPage }) {
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
+  const dsa = useSelector((state) => state.dsa);
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.
+  console.log(dsa);
   const [itemOffset, setItemOffset] = useState(0);
 
   useEffect(() => {
     // Fetch items from another resources.
     const endOffset = itemOffset + itemsPerPage;
     console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    setCurrentItems(questions.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(questions.length / itemsPerPage));
+    setCurrentItems(dsa.items.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(dsa.items.length / itemsPerPage));
   }, [itemOffset, itemsPerPage]);
 
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % questions.length;
+    const newOffset = (event.selected * itemsPerPage) % dsa.items.length;
     console.log(
       `User requested page number ${event.selected}, which is offset ${newOffset}`
     );
