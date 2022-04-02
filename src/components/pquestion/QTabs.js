@@ -50,7 +50,9 @@ function QTabs({ currVid }) {
   const languages = ["cpp", "java", "js"];
 
   const [value, setValue] = React.useState(0);
-  const [textEditorValue, setTextEditorValue] = useState("**Hello World**");
+  const [textEditorValue, setTextEditorValue] = useState(
+    "**Put your Notes Over here**"
+  );
   const [code, setCode] = useState(``);
   const [language, setLanguage] = useState(languages[0]);
 
@@ -63,7 +65,7 @@ function QTabs({ currVid }) {
   };
 
   return (
-    <Box sx={{ width: "100%"}}>
+    <Box sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={value}
@@ -83,7 +85,6 @@ function QTabs({ currVid }) {
 
       <TabPanel value={value} index={1}>
         <MDEditor value={textEditorValue} onChange={setTextEditorValue} />
-        <MDEditor.Markdown source={textEditorValue} />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Box sx={{ minWidth: 120 }}>
