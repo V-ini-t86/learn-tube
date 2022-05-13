@@ -5,7 +5,7 @@ import { Chip } from "@mui/material";
 import { fetchQuestionsSuccess } from "../../Redux/question/questionsActions";
 import { backendServerURL } from "../../utils/config";
 
-function TopicChip({ title }) {
+function TopicChip({ title, selectedTopics, setSelectedTopics }) {
   const [currTopic, setCurrTopic] = useState(null);
   const dispatch = useDispatch();
   const handleDelete = () => {
@@ -20,11 +20,28 @@ function TopicChip({ title }) {
     };
     removeByTopics();
   };
+  useEffect(() => {
+    // const filterByTopics = async () => {
+    //   topic += top;
+    //   try {
+    //     const { data } = await axios.get(
+    //       `${backendServerURL}/dsa?topic=${topic}`
+    //     );
+    //     dispatch(fetchQuestionsSuccess(data.result));
+    //   } catch (error) {
+    //     console.log(error.message);
+    //   }
+    // };
+    // filterByTopics();
+  }, [selectedTopics]);
 
   const handleClick = (top) => {
     let topic = "";
     setCurrTopic(top);
-
+    // setSelectedTopics((prev) => {
+    //   if (prev.find(top)) return prev;
+    //   return [...prev, top];
+    // });
     const filterByTopics = async () => {
       topic += top;
       try {

@@ -49,13 +49,13 @@ function Content({ loading, error, items, fetchDsa }) {
         {/* <ButtonInteraction /> */}
         <Topics />
       </Stack>
-      <PaginatedItems itemsPerPage={15} questions={items} />
-      {/* <div>
+      {/* <PaginatedItems itemsPerPage={15} questions={items} /> */}
+      <div>
         {items &&
           items.map((val) => {
             return <QCard key={val.id} que={val} />;
           })}
-      </div> */}
+      </div>
     </Container>
   );
 }

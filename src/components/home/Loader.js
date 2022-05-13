@@ -1,6 +1,7 @@
 import React from "react";
 import { Spinner } from "react-spinner-animated";
 import { Box } from "@mui/material";
+import Infinity from "../../images/Infinity1.gif";
 
 const style = {
   position: "absolute",
@@ -16,7 +17,7 @@ const style = {
 export default function Loader() {
   return (
     <Box sx={style}>
-      <Spinner width={"150px"} height={"150px"} />
+      <img src={Infinity} alt="infy-spinner" />
     </Box>
   );
 }
