@@ -18,6 +18,7 @@ const Container = styled(Box)(({ theme }) => ({
 const Header = tw(HeadSubTitle)`text-black text-3xl text-center my-1`;
 
 function Topics() {
+  const [selectedTopics, setSelectedTopics] = useState([]);
   return (
     <Container>
       <Box
@@ -49,7 +50,14 @@ function Topics() {
           >
             {topic &&
               topic.map((val) => {
-                return <TopicChip key={val.id} title={val.title} />;
+                return (
+                  <TopicChip
+                    key={val.id}
+                    selectedTopics={selectedTopics}
+                    setSelectedTopics={setSelectedTopics}
+                    title={val.title}
+                  />
+                );
               })}
           </div>
         </Box>
