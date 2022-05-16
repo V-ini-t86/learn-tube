@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Typography, Chip } from "@mui/material";
 import tw from "twin.macro";
 import axios from "axios";
@@ -19,6 +19,26 @@ const Header = tw(HeadSubTitle)`text-black text-3xl text-center my-1`;
 
 function Topics() {
   const [selectedTopics, setSelectedTopics] = useState([]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const filterByTopics = async () => {
+      try {
+        const { data } = await axios.get(
+          `${backendServerURL}/dsa?topic=${selectedTopics.join(",")}`
+        );
+        dispatch(fetchQuestionsSuccess(data.result));
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    filterByTopics();
+  }, [selectedTopics]);
+
+  const handleDelete = (top) => {
+    setSelectedTopics((prev) => prev.filter((val, i) => i !== top));
+  };
+
   return (
     <Container>
       <Box
@@ -40,6 +60,29 @@ function Topics() {
             padding: "40px 20px 20px 20px",
           }}
         >
+          <Box
+            display="flex"
+            flexDirection="row"
+            flexWrap="wrap"
+            sx={{
+              background: "#322020",
+            }}
+          >
+            {selectedTopics &&
+              selectedTopics.map((top, i) => {
+                return (
+                  <Chip
+                    key={i}
+                    sx={{ color: "white", margin: "0.4rem" }}
+                    variant="outlined"
+                    size="medium"
+                    color={"primary"}
+                    label={top}
+                    onDelete={() => handleDelete(i)}
+                  />
+                );
+              })}
+          </Box>
           <div
             style={{
               display: "flex",

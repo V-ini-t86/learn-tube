@@ -6,69 +6,12 @@ import { fetchQuestionsSuccess } from "../../Redux/question/questionsActions";
 import { backendServerURL } from "../../utils/config";
 
 function TopicChip({ title, selectedTopics, setSelectedTopics }) {
-  const [currTopic, setCurrTopic] = useState(null);
-  const dispatch = useDispatch();
-  const handleDelete = () => {
-    setCurrTopic(null);
-    const removeByTopics = async () => {
-      try {
-        const { data } = await axios.get(`${backendServerURL}/dsa`);
-        dispatch(fetchQuestionsSuccess(data.result));
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    removeByTopics();
-  };
-  useEffect(() => {
-    // const filterByTopics = async () => {
-    //   topic += top;
-    //   try {
-    //     const { data } = await axios.get(
-    //       `${backendServerURL}/dsa?topic=${topic}`
-    //     );
-    //     dispatch(fetchQuestionsSuccess(data.result));
-    //   } catch (error) {
-    //     console.log(error.message);
-    //   }
-    // };
-    // filterByTopics();
-  }, [selectedTopics]);
-
   const handleClick = (top) => {
-    let topic = "";
-    setCurrTopic(top);
-    // setSelectedTopics((prev) => {
-    //   if (prev.find(top)) return prev;
-    //   return [...prev, top];
-    // });
-    const filterByTopics = async () => {
-      topic += top;
-      try {
-        const { data } = await axios.get(
-          `${backendServerURL}/dsa?topic=${topic}`
-        );
-        dispatch(fetchQuestionsSuccess(data.result));
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-
-    filterByTopics();
+    setSelectedTopics((prev) => {
+      if (prev.indexOf(top) !== -1) return prev;
+      return [...prev, top];
+    });
   };
-
-  if (currTopic) {
-    return (
-      <Chip
-        sx={{ color: "white" }}
-        variant="outlined"
-        size="medium"
-        color={"primary"}
-        label={title}
-        onDelete={() => handleDelete()}
-      />
-    );
-  }
 
   return (
     <Chip
