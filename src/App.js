@@ -9,6 +9,8 @@ import Register from "./components/auth/Register";
 import { Provider } from "react-redux";
 import store from "./store";
 import RequireAuth from "./components/auth/RequireAuth";
+import Playground from "./components/Playground/Playground";
+import Board from "./components/Board/Board";
 
 function App() {
   return (
@@ -23,6 +25,9 @@ function App() {
             <Route path="/login" element={<Login />} />
           </Route>
           <Route path="/register" element={<Register />} />
+          <Route path="/playground" element={<Playground />} />
+          <Route path="/whiteboard" element={<Board />} />
+
           <Route path="*" element={<Error />} />
         </Routes>
       </Provider>

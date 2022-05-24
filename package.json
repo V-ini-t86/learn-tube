@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "@monaco-editor/react": "^4.4.5",
     "@mui/icons-material": "^5.3.0",
     "@mui/material": "^5.3.0",
     "@mui/styled-engine-sc": "^5.3.0",
@@ -26,6 +27,8 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "react-select": "^5.3.2",
+    "react-sketch-canvas": "^6.1.5",
     "react-spinner-animated": "^3.1.1",
     "react-youtube": "^7.14.0",
     "redux": "^4.1.2",
