@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import tw from "twin.macro";
-import { Stack, Box } from "@mui/material";
+import { Stack, Box, Pagination } from "@mui/material";
 import ReactPaginate from "react-paginate";
 import QCard from "../template/Card";
-import { fetchDsa } from "../../Redux/question/questionsActions";
-import { connect } from "react-redux";
+import {
+  fetchDsa,
+  fetchQuestionsSuccess,
+} from "../../Redux/question/questionsActions";
+import { connect, useDispatch } from "react-redux";
 import { styled, theme } from "@mui/system";
+import axios from "axios";
+import { backendServerURL } from "../../utils/config";
 import { Spinner } from "react-spinner-animated";
 import ButtonInteraction from "../DSA/ButtonInteraction";
 
@@ -24,11 +29,29 @@ const Container = styled("div")(({ theme }) => ({
 
 function Content({ loading, error, items, fetchDsa }) {
   const [screenWidth, setScreenWidth] = useState(window.screen.width);
+  const dispatch = useDispatch();
   console.log(screenWidth);
+  const [page, setPage] = useState(1);
+  const handleChange = (e, value) => {
+    const selectByPage = async () => {
+      try {
+        const { data } = await axios.get(
+          `${backendServerURL}/dsa?page=${value}&limit=15}`
+        );
+        dispatch(fetchQuestionsSuccess(data.result));
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    selectByPage();
+    setPage(value);
+    console.log(value);
+  };
 
   useEffect(() => {
     setScreenWidth(window.screen.width);
-  }, [screenWidth]);
+    setPage(!page);
+  }, [screenWidth, items]);
 
   useEffect(() => {
     fetchDsa();
@@ -50,6 +73,7 @@ function Content({ loading, error, items, fetchDsa }) {
         <Topics />
       </Stack>
       {/* <PaginatedItems itemsPerPage={15} questions={items} /> */}
+      {/* <Pagination count={15} page={page} onChange={handleChange} /> */}
       <div>
         {items &&
           items.map((val) => {
