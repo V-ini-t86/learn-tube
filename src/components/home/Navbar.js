@@ -9,11 +9,13 @@ import Menu from "@mui/material/Menu";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
+import DeveloperBoardIcon from "@mui/icons-material/DeveloperBoard";
 import Avatar from "@mui/material/Avatar";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import CodeIcon from "@mui/icons-material/Code";
 import Stack from "@mui/material/Stack";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -115,6 +117,7 @@ const Navbar = () => {
         >
           <NavHeader />
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            {/* <h5>Coding Playground</h5> */}
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -184,6 +187,16 @@ const Navbar = () => {
               textUnderlineOffset: "8px",
             }}
           >
+            <Link to="/playground">
+              <IconButton>
+                <CodeIcon color="white" />
+              </IconButton>
+            </Link>
+            <Link to="/whiteboard">
+              <IconButton>
+                <DeveloperBoardIcon color="white" />
+              </IconButton>
+            </Link>
             {/* <Box sx={{ width: "60%" }}>
               <Search>
                 <SearchIconWrapper>
