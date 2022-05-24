@@ -119,7 +119,7 @@ function YoutubeVideo({ currVid }) {
 
   return (
     <>
-      <h3>{question.name}</h3>
+      <h3>{question && question.name}</h3>
       <YouTube videoId={currVid} opts={opts} />
       <Tooltip title={isLiked ? "Unlike" : "I like this"}>
         <IconButton onClick={likedHandler}>

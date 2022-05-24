@@ -31,7 +31,6 @@ function Topics() {
         console.log(error.message);
       }
     };
-
     filterByTopics();
   }, [selectedTopics]);
 
