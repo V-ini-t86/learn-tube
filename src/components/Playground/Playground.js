@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PlaygroundNav from "./PlaygroundNav";
 import "./Playground.css";
+import { backendServerURL } from "../../utils/config";
 import Editor from "@monaco-editor/react";
 import Axios from "axios";
 import spinner from "./Eclipse.gif";
@@ -10,7 +11,7 @@ function Playground() {
   const [userCode, setUserCode] = useState(``);
 
   // State variable to set editors default language
-  const [userLang, setUserLang] = useState("python");
+  const [userLang, setUserLang] = useState("python3");
 
   // State variable to set editors default theme
   const [userTheme, setUserTheme] = useState("vs-dark");
@@ -41,15 +42,12 @@ function Playground() {
 
     // Post request to compile endpoint
     Axios.post(
-      `https://api.jdoodle.com/v1/execute`,
+      `${backendServerURL}/playground`,
       {
-        script: JSON.stringify(userCode),
-        language: "cpp17",
+        script: userCode,
+        language: userLang,
         versionIndex: "0",
         stdin: userInput,
-        clientId: "238b1b046fda7e518ed332c1945cfaed",
-        clientSecret:
-          "8f67dd97e7069d94895b08b91d1a90f6e36e7a457ebdf3baebfc34fb3c237271",
       },
       {
         headers: {

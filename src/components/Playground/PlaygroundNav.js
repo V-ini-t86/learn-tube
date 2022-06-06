@@ -32,10 +32,12 @@ const PlaygroundNav = ({
   setFontSize,
 }) => {
   const languages = [
-    { value: "c", label: "C" },
-    { value: "c++", label: "cpp17" },
-    { value: "python", label: "Python" },
-    { value: "java", label: "Java" },
+    { value: "c", label: "c", versionIndex: "0" },
+    { value: "cpp17", label: "c++17", versionIndex: "0" },
+    { value: "cpp14", label: "c++14", versionIndex: "0" },
+    { value: "csharp", label: "C#", versionIndex: "0" },
+    { value: "python3", label: "Python3", versionIndex: "0" },
+    { value: "java", label: "java", versionIndex: "0" },
   ];
   const themes = [
     { value: "vs-dark", label: "Dark" },
