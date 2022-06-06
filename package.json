@@ -1,6 +1,7 @@
 {
   "name": "learn-tube",
   "version": "0.1.0",
+  "proxy": "https://api.jdoodle.com/v1",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.1",
