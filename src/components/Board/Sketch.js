@@ -1,6 +1,6 @@
 import { createRef } from "react";
 import { ReactSketchCanvas } from "react-sketch-canvas";
-import { IconButton } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import UndoIcon from "@mui/icons-material/Undo";
 import RedoIcon from "@mui/icons-material/Redo";
 import ClearAllIcon from "@mui/icons-material/ClearAll";
@@ -32,21 +32,33 @@ const Sketch = () => {
   }
   return (
     <div>
-      <IconButton onClick={penFunc}>
-        <CreateIcon />
-      </IconButton>
-      <IconButton onClick={redofunc}>
-        <RedoIcon />
-      </IconButton>
-      <IconButton onClick={clearAll}>
-        <ClearAllIcon />
-      </IconButton>
-      <IconButton onClick={undofunc}>
-        <UndoIcon />
-      </IconButton>
-      <IconButton onClick={eraseFunc}>
-        <p>Erase</p>
-      </IconButton>
+      <Tooltip title="Pen">
+        <IconButton onClick={penFunc}>
+          <CreateIcon />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="Redo">
+        <IconButton onClick={redofunc}>
+          <RedoIcon />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="Clear">
+        <IconButton onClick={clearAll}>
+          <ClearAllIcon />
+        </IconButton>
+      </Tooltip>
+      <Tooltip>
+        <Tooltip title="Undo">
+          <IconButton onClick={undofunc}>
+            <UndoIcon />
+          </IconButton>
+        </Tooltip>
+      </Tooltip>
+      <Tooltip title="Erase">
+        <IconButton onClick={eraseFunc}>
+          <p>Erase</p>
+        </IconButton>
+      </Tooltip>
 
       <ReactSketchCanvas
         ref={sketchRef}

@@ -135,9 +135,9 @@ function YoutubeVideo({ currVid }) {
           {isWatchLater ? <WatchLater /> : <WatchLaterOutlined />}
         </IconButton>
       </Tooltip>
-      <IconButton onClick={playListHandler}>
+      {/* <IconButton onClick={playListHandler}>
         <PlaylistAdd />
-      </IconButton>
+      </IconButton> */}
       {open && <ErrorModal open={open} setOpen={setOpen} />}
     </>
   );

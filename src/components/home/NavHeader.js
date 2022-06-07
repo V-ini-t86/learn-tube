@@ -29,7 +29,7 @@ function NavHeader() {
         variant="h6"
         noWrap
         component="div"
-        sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+        sx={{ mr: 2, display: { md: "flex" } }}
       >
         <Link to="/">
           <LogoBtn>
@@ -45,6 +45,7 @@ function NavHeader() {
           textDecorationThickness: "1px",
           textUnderlineOffset: "8px",
           color: "white",
+          display: { xs: "none", md: "flex" },
         }}
         component="h4"
         fontWeight="light"
