@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -47,13 +48,23 @@ function a11yProps(index) {
 }
 
 function QTabs({ currVid }) {
-  const languages = ["cpp", "java", "js"];
-
+  const languages = ["cpp", "java", "python", "csharp", "r", "ruby", "js"];
+  const params = useParams();
   const [value, setValue] = React.useState(0);
   const [textEditorValue, setTextEditorValue] = useState(
-    "**Put your Notes Over here**"
+    JSON.parse(localStorage.getItem(`note-${params.queId}`)) ||
+      "**Put your Notes Over here**"
   );
-  const [code, setCode] = useState(``);
+
+  useEffect(() => {
+    localStorage.setItem(
+      `note-${params.queId}`,
+      JSON.stringify(textEditorValue)
+    );
+  }, [textEditorValue]);
+  const [code, setCode] = useState(
+    JSON.parse(localStorage.getItem(`code-${params.queId}`)) || ``
+  );
   const [language, setLanguage] = useState(languages[0]);
 
   const handleLanguageChange = (e) => {
@@ -111,13 +122,20 @@ function QTabs({ currVid }) {
           value={code}
           language={language}
           placeholder={`Please enter ${language} code.`}
-          onChange={(evn) => setCode(evn.target.value)}
+          onChange={(evn) => {
+            localStorage.setItem(
+              `code-${params.queId}`,
+              JSON.stringify(evn.target.value)
+            );
+            setCode(evn.target.value);
+          }}
           padding={15}
           style={{
             fontSize: 15,
             backgroundColor: "#f5f5f5",
             fontFamily:
               "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+            width: "100%",
           }}
         />
       </TabPanel>

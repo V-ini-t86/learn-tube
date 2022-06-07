@@ -55,7 +55,7 @@ function Login() {
     auth.isAuthenticated && navigate("/");
   }
   return (
-    <Container>
+    <Container sx={{ padding: "4rem 0rem" }}>
       <NavContainer>
         <NavHeader />
       </NavContainer>
@@ -118,17 +118,6 @@ function Login() {
               <SubmitButton type="submit" variant="contained" color="info">
                 Login
               </SubmitButton>
-              <Box
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                gap="10px"
-              >
-                <p>or sign in with</p>
-                <IconBtn>
-                  <img src={GoogleIcon} alt="google-icon" />
-                </IconBtn>
-              </Box>
             </Form>
           </Box>
         </FormContainer>

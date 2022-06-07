@@ -25,7 +25,7 @@ import Logo from "../../images/LTlogo.svg";
 import NavHeader from "./NavHeader";
 
 const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Logout"];
+const settings = ["Logout"];
 const NavContainer = styled(AppBar)(({ theme }) => ({
   backgroundColor: "#373e98",
 }));
@@ -116,43 +116,6 @@ const Navbar = () => {
           disableGutters
         >
           <NavHeader />
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            {/* <h5>Coding Playground</h5> */}
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page, i) => (
-                <MenuItem key={i} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
           {/* <Typography
             variant="h6"
             noWrap
@@ -188,14 +151,18 @@ const Navbar = () => {
             }}
           >
             <Link to="/playground">
-              <IconButton>
-                <CodeIcon color="white" />
-              </IconButton>
+              <Tooltip title="Playground">
+                <IconButton>
+                  <CodeIcon sx={{ color: "white" }} />
+                </IconButton>
+              </Tooltip>
             </Link>
             <Link to="/whiteboard">
-              <IconButton>
-                <DeveloperBoardIcon color="white" />
-              </IconButton>
+              <Tooltip title="Whiteboard">
+                <IconButton>
+                  <DeveloperBoardIcon sx={{ color: "white" }} />
+                </IconButton>
+              </Tooltip>
             </Link>
             {/* <Box sx={{ width: "60%" }}>
               <Search>
