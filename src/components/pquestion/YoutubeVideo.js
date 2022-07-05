@@ -121,7 +121,7 @@ function YoutubeVideo({ currVid }) {
     <>
       <h3>{question && question.name}</h3>
       <YouTube videoId={currVid} opts={opts} />
-      <Tooltip title={isLiked ? "Unlike" : "I like this"}>
+      {/* <Tooltip title={isLiked ? "Unlike" : "I like this"}>
         <IconButton onClick={likedHandler}>
           {isLiked === true ? <ThumbUp /> : <ThumbUpAltOutlined />}
         </IconButton>
@@ -134,7 +134,7 @@ function YoutubeVideo({ currVid }) {
         <IconButton onClick={watchLaterHandler}>
           {isWatchLater ? <WatchLater /> : <WatchLaterOutlined />}
         </IconButton>
-      </Tooltip>
+      </Tooltip> */}
       {/* <IconButton onClick={playListHandler}>
         <PlaylistAdd />
       </IconButton> */}
